@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Anillo Solitario",
+    "categoria": "anillos",
+    "metal": "oro",
+    "precio": 4850000
+  },
+  {
+    "id": 2,
+    "nombre": "Anillo Eternity",
+    "categoria": "anillos",
+    "metal": "oro",
+    "precio": 4850000
+  },
+  {
+    "id": 3,
+    "nombre": "Anillo Tres Piedras",
+    "categoria": "anillos",
+    "metal": "oro",
+    "precio": 4850000
+  }
+]
