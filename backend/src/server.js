@@ -14,9 +14,6 @@ app.get("/api/tienda", (req, res) => {
     res.json({ nombre: "Estilo Alfa" });
 });
 
-app.listen(3000, () => {
-    console.log("Servidor escuchando en el puerto 3000");
-});
 
 app.get("/api/productos/:id", (req, res) => {
     const id = Number(req.params.id);
@@ -27,4 +24,8 @@ app.get("/api/productos/:id", (req, res) => {
     }
 
     res.json(producto);
+});
+
+app.listen(3000, () => {
+    console.log("Servidor escuchando en el puerto 3000");
 });
