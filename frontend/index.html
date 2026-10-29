@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa Esmeralda Joyería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Karla:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Casa <em>Esmeralda</em></div>
+    <div class="notice">Catálogo · Ventas por consulta, sin pagos en línea</div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow">Colección 2026</span>
+    <h1>Oro 18k, plata ley 950 y <em>esmeraldas</em> colombianas</h1>
+    <p>Piezas hechas a mano en nuestro taller. Escoge una joya para ver sus detalles y escríbenos para confirmar talla y disponibilidad.</p>
+  </div>
+</section>
+
+<nav class="filters" aria-label="Filtros del catálogo">
+  <div class="wrap">
+    <div class="chips" id="chips" role="group" aria-label="Categoría"></div>
+    <div class="controls">
+      <label for="metal">Metal
+        <select id="metal">
+          <option value="">Todos</option>
+          <option value="oro">Oro 18k</option>
+          <option value="plata">Plata ley 950</option>
+          <option value="rosa">Oro rosa 18k</option>
+        </select>
+      </label>
+      <label for="orden">Ordenar
+        <select id="orden">
+          <option value="destacado">Destacados</option>
+          <option value="asc">Precio: menor a mayor</option>
+          <option value="desc">Precio: mayor a menor</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <p class="count" id="count"></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Casa Esmeralda · Catálogo de ejemplo</span>
+    <span>Precios en pesos colombianos (COP), IVA incluido</span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden></aside>
+
+<script src="js/productos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

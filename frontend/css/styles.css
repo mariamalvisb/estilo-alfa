@@ -1,0 +1,110 @@
+/* Layout: vitrina — encabezado sobrio, barra de filtros, rejilla de piezas, ficha en panel lateral */
+:root {
+  --bg: #f2f4f1;
+  --surface: #ffffff;
+  --fg: #18231e;
+  --muted: #5d6a63;
+  --line: #d9dfda;
+  --accent: #0e5c47;      /* esmeralda */
+  --accent-fg: #ffffff;
+  --gold: #9a7530;
+  --stage: #e6ebe7;       /* fondo de la foto de producto */
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1412; --surface: #151d1a; --fg: #e7ece9; --muted: #9aa8a1; --line: #26332e;
+    --accent: #3fb38b; --accent-fg: #06120d; --gold: #d2ad62; --stage: #1b2622; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1412; --surface: #151d1a; --fg: #e7ece9; --muted: #9aa8a1; --line: #26332e;
+  --accent: #3fb38b; --accent-fg: #06120d; --gold: #d2ad62; --stage: #1b2622; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.55;
+}
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Encabezado */
+header.top { border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px; }
+.brand { font-family: var(--display); font-size: 1.55rem; font-weight: 600; letter-spacing: .01em; }
+.brand em { font-style: italic; font-weight: 400; color: var(--accent); }
+.notice { font-size: .82rem; color: var(--muted); letter-spacing: .04em; }
+
+.intro .wrap { padding-block: 48px 28px; display: grid; gap: 14px; }
+.eyebrow { font-size: .75rem; text-transform: uppercase; letter-spacing: .16em; color: var(--gold); font-weight: 700; }
+.intro h1 {
+  font-family: var(--display); font-weight: 400; margin: 0;
+  font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.05; text-wrap: balance; max-width: 18ch;
+}
+.intro h1 em { color: var(--accent); }
+.intro p { margin: 0; max-width: 60ch; color: var(--muted); }
+
+/* Filtros */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-block: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.filters .wrap { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; padding-block: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: inherit; font-size: .9rem; cursor: pointer;
+  background: transparent; color: var(--fg);
+  border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; }
+.controls label { font-size: .8rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+select {
+  font: inherit; font-size: .9rem; color: var(--fg); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Rejilla */
+main .wrap { padding-block: 28px 64px; }
+.count { font-size: .85rem; color: var(--muted); margin: 0 0 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 28px 22px; }
+.card { all: unset; cursor: pointer; display: grid; gap: 10px; align-content: start; }
+.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+.stage { aspect-ratio: 4 / 5; max-width: 100%; background: var(--stage); display: grid; place-items: center; position: relative; overflow: hidden; }
+.stage svg { width: 72%; height: auto; transition: transform .4s ease; }
+.card:hover .stage svg { transform: scale(1.05); }
+.tag { position: absolute; top: 10px; left: 10px; font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; background: var(--surface); color: var(--fg); padding: 3px 8px; }
+.card h3 { font-family: var(--display); font-weight: 400; font-size: 1.2rem; margin: 0; line-height: 1.2; }
+.meta { font-size: .85rem; color: var(--muted); }
+.price { font-weight: 700; font-variant-numeric: tabular-nums; }
+.empty { padding: 40px 0; color: var(--muted); }
+
+/* Ficha de producto */
+.scrim { position: fixed; inset: 0; background: rgb(0 0 0 / .45); z-index: 20; }
+.sheet {
+  position: fixed; z-index: 21; top: 0; right: 0; bottom: 0; width: min(520px, 100%);
+  background: var(--surface); overflow-y: auto;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) max(22px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px;
+  display: grid; gap: 16px; align-content: start;
+}
+.close { justify-self: end; font: inherit; background: none; border: 1px solid var(--line); color: var(--fg); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+.sheet .stage { aspect-ratio: 1 / 1; }
+.sheet h2 { font-family: var(--display); font-weight: 400; font-size: 2rem; margin: 0; line-height: 1.1; text-wrap: balance; }
+.sheet .price { font-size: 1.25rem; }
+.specs { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; padding-block: 14px; border-block: 1px solid var(--line); }
+.specs dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); padding-top: 2px; }
+.specs dd { margin: 0; }
+.ask { background: var(--stage); padding: 14px 16px; font-size: .92rem; }
+.ask strong { display: block; margin-bottom: 4px; }
+.copy { font: inherit; font-size: .85rem; margin-top: 8px; cursor: pointer; background: var(--accent); color: var(--accent-fg); border: 0; padding: 7px 14px; border-radius: 6px; }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 24px; font-size: .85rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (prefers-reduced-motion: reduce) { .stage svg { transition: none; } }
