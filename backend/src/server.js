@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const productos = require('./data/productos.json');
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
 
 app.get("/api/salud", (req, res) => {
     res.json({ estado: "ok" });
