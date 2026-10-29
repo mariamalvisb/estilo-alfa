@@ -1,3 +1,4 @@
+let productos = [];
 const CATEGORIAS = [
   ["todas", "Todas"], ["anillos", "Anillos"], ["collares", "Collares"], ["aretes", "Aretes"], ["pulseras", "Pulseras"]
 ];
@@ -145,4 +146,16 @@ $scrim.addEventListener("click", cerrar);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$sheet.hidden) cerrar(); });
 
 $metal.value = estado.metal; $orden.value = estado.orden;
-renderChips(); renderGrid();
+
+async function cargarProductos() {
+  try {
+    const respuesta = await fetch("/api/productos");
+    productos = await respuesta.json();
+    renderChips();
+    renderGrid();
+  } catch (error) {
+    $grid.innerHTML = `<p class="empty">No pudimos cargar el catálogo. Intenta de nuevo.</p>`;
+  }
+}
+
+cargarProductos();
